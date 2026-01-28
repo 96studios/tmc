@@ -693,6 +693,109 @@ input[type="date"]::-webkit-calendar-picker-indicator {
         padding: 2rem !important;
     }
 }
+        
+/* meeting counter on mobile */
+@media (max-width: 768px) {
+    .countdown-container {
+        padding: 15px 10px;
+        margin: 15px 0;
+    }
+    
+    .countdown-display {
+        gap: 8px;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding: 5px;
+        justify-content: space-between;
+    }
+    
+    .countdown-unit {
+        min-width: 60px;
+        padding: 10px 5px;
+        flex: 1;
+    }
+    
+    .countdown-value {
+        font-size: 1.8rem;
+        font-weight: 700;
+        line-height: 1;
+    }
+    
+    .countdown-label {
+        font-size: 0.7rem;
+    }
+    
+    .meeting-info-panel {
+        padding: 15px;
+    }
+    
+    .meeting-details {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 576px) {
+    .countdown-container {
+        padding: 12px 8px;
+    }
+    
+    .countdown-display {
+        gap: 5px;
+    }
+    
+    .countdown-unit {
+        min-width: 50px;
+        padding: 8px 4px;
+    }
+    
+    .countdown-value {
+        font-size: 1.5rem;
+    }
+    
+    .countdown-label {
+        font-size: 0.65rem;
+    }
+    
+    .info-label {
+        min-width: 100px;
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    .meeting-agenda li {
+        padding-left: 20px;
+        margin-bottom: 8px;
+    }
+}
+
+@media (max-width: 400px) {
+    .countdown-unit {
+        min-width: 45px;
+        padding: 6px 3px;
+    }
+    
+    .countdown-value {
+        font-size: 1.3rem;
+    }
+    
+    .countdown-label {
+        font-size: 0.6rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .meeting-details .row > .col-md-6:first-child::after {
+        content: "";
+        display: block;
+        height: 1px;
+        background: #e0e0e0;
+        margin: 25px 0;
+    }
+    
+    .meeting-details .col-md-6:last-child h5:first-child {
+        padding-top: 20px;
+    }
+}
 </style>
 </head>
 <body>
