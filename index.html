@@ -23,7 +23,7 @@
         }
 
         html {
-    font-size: 15px; /* or 14.5px */
+    font-size: 15px;
 }
 
         
@@ -244,7 +244,6 @@
             font-size: 32px;
         }
         
-           /* Manager Section - Text Overlay on Image */
         .manager-container {
             position: absolute;
             right: 50px;
@@ -293,7 +292,6 @@
             display: none;
         }
 
-        /* Center navbar links on mobile & tablet */
 @media (max-width: 991.98px) {
     .navbar-collapse {
         text-align: center;
@@ -669,6 +667,33 @@
     background: #f8f9fa;
 }
     </style>
+
+    <style>
+
+/* Loading spinner */
+.btn-loading {
+    position: relative;
+    padding-right: 2.5rem;
+}
+
+/* Disabled dates styling */
+input[type="date"]:disabled {
+    background-color: #e9ecef;
+    cursor: not-allowed;
+}
+
+/* Weekend dates */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 2rem !important;
+    }
+}
+</style>
 </head>
 <body>
     <!-- Header Bar -->
@@ -713,7 +738,7 @@
                 </div>
             </div>
             
-            <!-- Manager Section - Text Overlay on Image -->
+            <!-- Manager Section -->
             <div class="manager-container d-none d-lg-block">
                 <div class="manager-picture">
                     <img src="/images/tms-hero-img@0.75x.jpg" alt="Manager Picture">
@@ -1255,7 +1280,7 @@
                                             </div>
                                             
                                             <div class="mt-4">
-                                                <h6>Time Until:</h6>
+                                                <h6>Meeting duration:</h6>
                                                 <p class="mb-2" id="timeUntilText">--</p>
                                             </div>
                                             
@@ -1288,10 +1313,192 @@
                     <div class="card-body">
                         <h5 class="mb-4">Recent Tiangmaatla Meeting</h5>
                         <div id="meetingsHistory">
-                            <!-- Meetings will be loaded dynamically -->
+
                             <div class="meeting-history-item">
                                 <div class="text-center py-4">
                                     <p class="text-muted mb-0">No recent meetings found</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Schedule Appointment Section -->
+<section id="appointment" class="section-spacing">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="fw-bold mb-4">Schedule an Appointment</h2>
+                <p class="lead">Book a meeting with Tiangmaatla Centre management</p>
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Appointments must be scheduled at least 2 days in advance. No same-day appointments.
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <div class="card border-0 shadow">
+                    <div class="card-body p-5">
+                        <form id="appointmentForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="appointmentName" class="form-label">Full Name *</label>
+                                    <input type="text" class="form-control" id="appointmentName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="appointmentEmail" class="form-label">Email Address *</label>
+                                    <input type="email" class="form-control" id="appointmentEmail" required>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="appointmentPhone" class="form-label">Phone Number *</label>
+                                    <input type="tel" class="form-control" id="appointmentPhone" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="appointmentType" class="form-label">Appointment Type *</label>
+                                    <select class="form-select" id="appointmentType" required>
+                                        <option value="" selected disabled>Select type of appointment</option>
+                                        <option value="Management Meeting">Management Meeting</option>
+                                        <option value="Project Discussion">Project Discussion</option>
+                                        <option value="Community Service">Community Service</option>
+                                        <option value="Business Proposal">Business Proposal</option>
+                                        <option value="General Inquiry">General Inquiry</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="appointmentDate" class="form-label">Preferred Date *</label>
+                                    <input type="date" class="form-control" id="appointmentDate" required min="">
+                                    <small class="text-muted">Minimum 2 days from today</small>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="appointmentTime" class="form-label">Preferred Time *</label>
+                                    <select class="form-select" id="appointmentTime" required>
+                                        <option value="" selected disabled>Select time slot</option>
+                                        <option value="08:00">08:00 AM</option>
+                                        <option value="09:00">09:00 AM</option>
+                                        <option value="10:00">10:00 AM</option>
+                                        <option value="11:00">11:00 AM</option>
+                                        <option value="12:00">12:00 PM</option>
+                                        <option value="13:00">01:00 PM</option>
+                                        <option value="14:00">02:00 PM</option>
+                                        <option value="15:00">03:00 PM</option>
+                                    </select>
+                                    <small class="text-muted">Office hours: Mon-Thur 8AM-4PM, Fri 8AM-1PM</small>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="appointmentSubject" class="form-label">Appointment Subject *</label>
+                                <input type="text" class="form-control" id="appointmentSubject" 
+                                       placeholder="What is this appointment about?" required>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="appointmentReason" class="form-label">Reason for Appointment *</label>
+                                <textarea class="form-control" id="appointmentReason" rows="4" 
+                                          placeholder="Please provide detailed reason for requesting this appointment..." required></textarea>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="appointmentDetails" class="form-label">Additional Details (Optional)</label>
+                                <textarea class="form-control" id="appointmentDetails" rows="3" 
+                                          placeholder="Any additional information or documents you'd like to mention..."></textarea>
+                            </div>
+                            
+                            <div class="alert alert-warning">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <strong>Important:</strong> 
+                                <ul class="mb-0 mt-2">
+                                    <li>Appointments require at least 2 days notice</li>
+                                    <li>You will receive confirmation via email or phone call within 24 hours</li>
+                                    <li>Please arrive 10 minutes before your scheduled time</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button type="button" class="btn btn-outline-secondary" id="resetFormBtn">Clear Form</button>
+                                <button type="submit" class="btn btn-sa" id="submitAppointmentBtn">
+                                    <span id="submitText">Submit Appointment Request</span>
+                                    <span id="loadingSpinner" style="display: none;">
+                                        <i class="fas fa-spinner fa-spin ms-2"></i> Submitting...
+                                    </span>
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <!-- Success/Error Messages -->
+                        <div class="alert alert-success mt-3" id="appointmentSuccess" style="display: none;">
+                            <h5><i class="fas fa-check-circle me-2"></i>Appointment Request Submitted!</h5>
+                            <p>Your appointment request has been sent to Tiangmaatla management.</p>
+                            <p class="mb-0"><strong>What happens next:</strong> You will receive a confirmation email or phone call within 24 hours to finalize your appointment.</p>
+                        </div>
+                        
+                        <div class="alert alert-danger mt-3" id="appointmentError" style="display: none;">
+                            <h5><i class="fas fa-exclamation-circle me-2"></i>Submission Error</h5>
+                            <p id="errorMessage">There was an error submitting your appointment. Please try again or contact us directly.</p>
+                        </div>
+                        
+                        <div class="alert alert-warning mt-3" id="dateWarning" style="display: none;">
+                            <p class="mb-0" id="warningMessage"></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Appointment Instructions -->
+                <div class="card border-0 shadow mt-4">
+                    <div class="card-body p-4">
+                        <h5 class="mb-3">How Appointment Booking Works</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="d-flex mb-3">
+                                    <div class="me-3">
+                                        <span class="badge bg-primary rounded-circle p-2">1</span>
+                                    </div>
+                                    <div>
+                                        <h6>Submit Request</h6>
+                                        <p class="small text-muted mb-0">Fill out this form with your appointment details</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex mb-3">
+                                    <div class="me-3">
+                                        <span class="badge bg-primary rounded-circle p-2">2</span>
+                                    </div>
+                                    <div>
+                                        <h6>We Receive It</h6>
+                                        <p class="small text-muted mb-0">Your request goes directly to our Google Sheet for review</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-flex mb-3">
+                                    <div class="me-3">
+                                        <span class="badge bg-primary rounded-circle p-2">3</span>
+                                    </div>
+                                    <div>
+                                        <h6>We Contact You</h6>
+                                        <p class="small text-muted mb-0">We'll call or email you within 24 hours to confirm</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="me-3">
+                                        <span class="badge bg-primary rounded-circle p-2">4</span>
+                                    </div>
+                                    <div>
+                                        <h6>Appointment Finalized</h6>
+                                        <p class="small text-muted mb-0">Once confirmed, your appointment is scheduled</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -1373,7 +1580,6 @@
                                         <button type="submit" class="btn btn-sa w-100" id="contactSubmitBtn">Send Message to Tiangmaatla</button>
                                     </form>
 
-                                    <!-- Add this success message after the form -->
                                     <div class="alert alert-success mt-3" id="contactSuccess" style="display: none;">
                                         <h5>Message Ready to Send!</h5>
                                         <p>Your email client should open with your message. Please send it to <strong>96studios.web@gmail.com</strong></p>
@@ -1409,7 +1615,7 @@
                     <h5>Follow Us</h5>
                     <div class="d-flex gap-3">
                         <a href="#" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-twitter fa-lg"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-tiktok fa-lg"></i></a>
                         <a href="#" class="text-white"><i class="fab fa-instagram fa-lg"></i></a>
                     </div>
                 </div>
@@ -1431,9 +1637,6 @@
 
     
 <script>
-// ============================================
-// EXISTING FUNCTIONS (from your original page)
-// ============================================
 
 // Contact form submission
 document.getElementById('contactForm').addEventListener('submit', function(e) {
@@ -1459,22 +1662,21 @@ ${message}
 Submitted via Tiangmaatla Website on ${new Date().toLocaleDateString()}
     `;
     
-    // Create mailto link
+    // mailto link
     const mailtoLink = `mailto:tiangmaatlatmc@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(emailBody)}`;
     
-    // Open email client
+    // email client
     window.location.href = mailtoLink;
     
-    // Show success message
+    // success message
     document.getElementById('contactSuccess').style.display = 'block';
     
-    // Optional: Reset form after submission
+    // Reset form after submission
     setTimeout(() => {
         document.getElementById('contactForm').reset();
     }, 1000);
 });
 
-// Simple animation for elements with fade-in class
 document.addEventListener('DOMContentLoaded', function() {
     const fadeElements = document.querySelectorAll('.fade-in');
     
@@ -1501,7 +1703,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 500);
     });
     
-    // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -1520,9 +1721,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // ============================================
-    // MEETINGS SYSTEM (New addition)
+    // MEETINGS SYSTEM
     // ============================================
-    initMeetingsSystem();
+    initMeetings();
 });
 
 
@@ -1530,32 +1731,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
 <script>
 // =============================
-// MEETINGS SYSTEM (Fixed Version)
+// MEETINGS SYSTEM
 // =============================
 
-// Meetings configuration (Default)
 const meetingsConfig = {
     currentMeeting: {
         id: 1,
-        title: "Tiangmaatla Management Team Meeting",
-        date: "2026-01-05",
-        time: "23:45",
-        duration: 0.1, // in hours
-        venue: "Tiangmaatla Management Office",
-        chair: "Manager Matsi M",
+        title: "Tinagmaatla Management Meeting",
+        date: "2026-01-28",
+        time: "13:00",
+        duration: 0.50, // 1 = hours, 0.50 = 30 min 
+        venue: "Tiangmaatla Multipurpose Centre",
+        chair: "Chewe M.J",
         agenda: [
             "Financial performance review",
             "Project progress updates",
             "Staff performance assessment",
-            "Upcoming community events planning",
             "Resource allocation for next quarter"
         ],
         attendees: [
             "Manager Matsi M",
-            "Assistant Manager",
-            "Project Coordinators",
-            "Department Heads",
-            "Finance Officer"
+            "Office Management",
+            "Finance Office"
         ],
         meetingLink: ""
     },
@@ -1563,9 +1760,19 @@ const meetingsConfig = {
     upcomingQueue: []
 };
 
-// Load saved meetings or use default
 let saved = localStorage.getItem('tiangmaatlaMeetings');
-let meetingsData = saved ? JSON.parse(saved) : meetingsConfig;
+let meetingsData = null;
+
+try {
+    meetingsData = saved ? JSON.parse(saved) : null;
+} catch (e) {
+    meetingsData = null;
+}
+
+if (!meetingsData || !meetingsData.currentMeeting) {
+    meetingsData = meetingsConfig;
+    localStorage.setItem('tiangmaatlaMeetings', JSON.stringify(meetingsConfig));
+}
 
 let currentMeetingData = meetingsData.currentMeeting;
 let pastMeetingsData = meetingsData.pastMeetings;
@@ -1613,7 +1820,7 @@ function setText(id, value) {
 }
 
 // =============================
-// Update Meeting Display
+// Meeting Display
 // =============================
 function updateMeetingDisplay() {
     if (!currentMeetingData) return;
@@ -1659,72 +1866,90 @@ function startCountdown() {
     const meetingEnd = new Date(meetingDate.getTime() + currentMeetingData.duration * 60 * 60 * 1000);
 
     function update() {
-        const now = new Date();
-        let diff, statusText, timeText;
+    const now = new Date();
+    let diff, statusText, timeText;
 
-        if (now < meetingDate) {
-            diff = meetingDate - now;
-            statusText = 'Upcoming';
-            timeText = 'Meeting starts in';
-            document.getElementById('joinMeetingBtn').disabled = true;
+    if (now < meetingDate) {
+        diff = meetingDate - now;
+        statusText = 'Upcoming';
+        timeText = '30 Minutes:';
+        document.getElementById('joinMeetingBtn').disabled = true;
 
-            // Countdown progress
-            const totalUntilStart = meetingDate - new Date();
-            const progress = Math.min(100, ((totalUntilStart - diff) / totalUntilStart) * 100);
-            document.getElementById('countdownProgress').style.width = `${progress}%`;
+        const totalUntilStart = meetingDate - new Date(meetingDate.getTime() - 24 * 60 * 60 * 1000); 
+        const timePassed = 24 * 60 * 60 * 1000 - diff; 
+        const progress = Math.min(100, Math.max(0, (timePassed / (24 * 60 * 60 * 1000)) * 100));
+        
+        document.getElementById('countdownProgress').style.width = `${progress}%`;
+        setText('countdownStatusText', `${Math.round(progress)}% of countdown complete`);
 
-            document.getElementById('durationProgress').style.width = '0%';
-            setText('durationText', '0% completed');
+        document.getElementById('durationProgress').style.width = '0%';
+        setText('durationText', '0% completed');
 
-        } else if (now >= meetingDate && now <= meetingEnd) {
-            diff = meetingEnd - now;
-            statusText = 'Ongoing';
-            timeText = 'Meeting ends in';
-            document.getElementById('joinMeetingBtn').disabled = false;
+    } else if (now >= meetingDate && now <= meetingEnd) {
+        diff = meetingEnd - now;
+        statusText = 'Ongoing';
+        timeText = 'Meeting ends in:';
+        document.getElementById('joinMeetingBtn').disabled = false;
 
-            // Duration progress
-            const totalDuration = meetingEnd - meetingDate;
-            const elapsed = totalDuration - diff;
-            const durationProgress = Math.min(100, (elapsed / totalDuration) * 100);
+        // Duration progress
+        const totalDuration = meetingEnd - meetingDate;
+        const elapsed = totalDuration - diff;
+        const durationProgress = Math.min(100, (elapsed / totalDuration) * 100);
 
-            document.getElementById('durationProgress').style.width = `${durationProgress}%`;
-            setText('durationText', `${Math.round(durationProgress)}% completed`);
+        document.getElementById('durationProgress').style.width = `${durationProgress}%`;
+        setText('durationText', `${Math.round(durationProgress)}% completed`);
 
-            document.getElementById('countdownProgress').style.width = '100%';
+        document.getElementById('countdownProgress').style.width = '100%';
+        setText('countdownStatusText', 'Countdown complete - Meeting in progress');
+
+    } else {
+        diff = 0;
+        statusText = 'Completed';
+        timeText = 'Meeting finished';
+        document.getElementById('countdownProgress').style.width = '100%';
+        setText('countdownStatusText', 'Countdown complete');
+        document.getElementById('durationProgress').style.width = '100%';
+        setText('durationText', '100% completed');
+        document.getElementById('joinMeetingBtn').disabled = true;
+    }
+
+    const statusBadge = document.getElementById('currentMeetingStatus');
+    if (statusBadge) {
+        statusBadge.textContent = statusText.toUpperCase();
+        statusBadge.className = 'meeting-status';
+        
+        if (statusText === 'Upcoming') {
+            statusBadge.classList.add('status-upcoming');
+        } else if (statusText === 'Ongoing') {
+            statusBadge.classList.add('status-ongoing');
         } else {
-            diff = 0;
-            statusText = 'Completed';
-            timeText = 'Meeting finished';
-            document.getElementById('countdownProgress').style.width = '100%';
-            document.getElementById('durationProgress').style.width = '100%';
-            setText('durationText', '100% completed');
-            document.getElementById('joinMeetingBtn').disabled = true;
-        }
-
-        setText('meetingStatusText', statusText);
-        setText('timeUntilText', timeText);
-
-        // Display time
-        if (diff > 0) {
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-            setText('days', days.toString().padStart(2, '0'));
-            setText('hours', hours.toString().padStart(2, '0'));
-            setText('minutes', minutes.toString().padStart(2, '0'));
-            setText('seconds', seconds.toString().padStart(2, '0'));
-        } else {
-            setText('days', '00');
-            setText('hours', '00');
-            setText('minutes', '00');
-            setText('seconds', '00');
-
-            // Move meeting to history automatically
-            moveToHistory();
+            statusBadge.classList.add('status-completed');
         }
     }
+
+    setText('meetingStatusText', statusText);
+    setText('timeUntilText', timeText);
+
+    // Countdown time
+    if (diff > 0) {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        setText('days', days.toString().padStart(2, '0'));
+        setText('hours', hours.toString().padStart(2, '0'));
+        setText('minutes', minutes.toString().padStart(2, '0'));
+        setText('seconds', seconds.toString().padStart(2, '0'));
+    } else {
+        setText('days', '00');
+        setText('hours', '00');
+        setText('minutes', '00');
+        setText('seconds', '00');
+
+        moveToHistory();
+    }
+}
 
     update();
     setInterval(update, 1000);
@@ -1746,7 +1971,7 @@ function moveToHistory() {
         summary: `Completed: ${currentMeetingData.title}`
     });
 
-    // Load next meeting if exists
+    // Loading next meeting if exists
     if (upcomingQueueData.length > 0) {
         currentMeetingData = upcomingQueueData.shift();
     } else {
@@ -1760,16 +1985,25 @@ function moveToHistory() {
 function updateHistoryDisplay() {
     const container = document.getElementById('meetingsHistory');
     if (!container) return;
+
+    // Getting the whole history card wrapper
+    const historyCard = container.closest('.meeting-history');
+
     container.innerHTML = '';
 
+    // If no past meetings, hide the entire section
     if (pastMeetingsData.length === 0) {
-        container.innerHTML = '<div class="meeting-history-item text-center py-4"><p class="text-muted mb-0">No recent meetings</p></div>';
+        if (historyCard) historyCard.style.display = 'none';
         return;
     }
+
+    // If we do have past meetings, show the section
+    if (historyCard) historyCard.style.display = 'block';
 
     pastMeetingsData.forEach(meeting => {
         const item = document.createElement('div');
         item.className = 'meeting-history-item';
+
         const startTime = formatTime(meeting.time);
         const endTime = formatTime(calculateEndTime(meeting.time, meeting.duration));
 
@@ -1826,6 +2060,159 @@ window.viewMeetings = function() {
 // Start on Page Load
 // =============================
 document.addEventListener('DOMContentLoaded', initMeetings);
+</script>
+
+<script>
+// Google Sheets Configuration
+const GOOGLE_SHEETS_WEBAPP_URL = 'https://script.google.com/macros/s/AKfycbwNHlX7Y-IcEiAOvQQQdesoEm7blXGjn33yMf6-H5TIOwUuBwDwZvVQrMJGE8CwLP65-A/exec';
+
+// minimum date (2 days from today)
+document.addEventListener('DOMContentLoaded', function() {
+    const appointmentDateInput = document.getElementById('appointmentDate');
+    const today = new Date();
+    const minDate = new Date(today);
+    minDate.setDate(today.getDate() + 2);
+    
+    const minDateString = minDate.toISOString().split('T')[0];
+    appointmentDateInput.min = minDateString;
+    
+    const maxDate = new Date(today);
+    maxDate.setDate(today.getDate() + 60);
+    const maxDateString = maxDate.toISOString().split('T')[0];
+    appointmentDateInput.max = maxDateString;
+    
+    appointmentDateInput.addEventListener('change', validateAppointmentDate);
+    document.getElementById('resetFormBtn').addEventListener('click', resetForm);
+    document.getElementById('appointmentForm').addEventListener('submit', submitAppointmentForm);
+});
+
+function validateAppointmentDate() {
+    const appointmentDateInput = document.getElementById('appointmentDate');
+    const dateWarning = document.getElementById('dateWarning');
+    const warningMessage = document.getElementById('warningMessage');
+    const selectedDate = new Date(appointmentDateInput.value);
+    const today = new Date();
+    const minDate = new Date(today);
+    minDate.setDate(today.getDate() + 2);
+    
+    if (selectedDate < minDate) {
+        warningMessage.textContent = 'Appointments must be scheduled at least 2 days in advance. Please select a later date.';
+        dateWarning.style.display = 'block';
+        appointmentDateInput.value = '';
+        return false;
+    }
+    
+    if (selectedDate.getDay() === 6 || selectedDate.getDay() === 0) {
+        warningMessage.textContent = 'Appointments are not available on weekends. Please select a weekday (Monday to Friday).';
+        dateWarning.style.display = 'block';
+        appointmentDateInput.value = '';
+        return false;
+    }
+    
+    dateWarning.style.display = 'none';
+    return true;
+}
+
+function resetForm() {
+    document.getElementById('appointmentForm').reset();
+    document.getElementById('appointmentSuccess').style.display = 'none';
+    document.getElementById('appointmentError').style.display = 'none';
+    document.getElementById('dateWarning').style.display = 'none';
+    
+    const appointmentDateInput = document.getElementById('appointmentDate');
+    const today = new Date();
+    const minDate = new Date(today);
+    minDate.setDate(today.getDate() + 2);
+    const minDateString = minDate.toISOString().split('T')[0];
+    appointmentDateInput.min = minDateString;
+}
+
+async function submitAppointmentForm(event) {
+    event.preventDefault();
+    
+    if (!validateAppointmentDate()) return;
+    
+    const form = document.getElementById('appointmentForm');
+    if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+    }
+    
+    // Show loading
+    const submitBtn = document.getElementById('submitAppointmentBtn');
+    const submitText = document.getElementById('submitText');
+    const loadingSpinner = document.getElementById('loadingSpinner');
+    
+    submitBtn.disabled = true;
+    submitText.style.display = 'none';
+    loadingSpinner.style.display = 'inline';
+    
+    const params = new URLSearchParams();
+    params.append('name', document.getElementById('appointmentName').value);
+    params.append('email', document.getElementById('appointmentEmail').value);
+    params.append('phone', document.getElementById('appointmentPhone').value);
+    params.append('type', document.getElementById('appointmentType').value);
+    params.append('date', document.getElementById('appointmentDate').value);
+    params.append('time', document.getElementById('appointmentTime').value);
+    params.append('subject', document.getElementById('appointmentSubject').value);
+    params.append('reason', document.getElementById('appointmentReason').value);
+    params.append('details', document.getElementById('appointmentDetails').value);
+    params.append('timestamp', new Date().toISOString());
+    
+    const url = `${GOOGLE_SHEETS_WEBAPP_URL}?${params.toString()}`;
+    
+    console.log('Submitting to:', url);
+    
+    try {
+        const response = await fetch(url);
+        const result = await response.json();
+        
+        console.log('Response:', result);
+        
+        if (result.success) {
+            showSuccessMessage();
+        } else {
+            showErrorMessage(result.message || 'Submission failed');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        showErrorMessage('Failed to submit. Please try again or contact us.');
+    } finally {
+        submitBtn.disabled = false;
+        submitText.style.display = 'inline';
+        loadingSpinner.style.display = 'none';
+    }
+}
+
+function showSuccessMessage() {
+    document.getElementById('appointmentSuccess').style.display = 'block';
+    document.getElementById('appointmentError').style.display = 'none';
+    document.getElementById('appointmentForm').style.display = 'none';
+    document.getElementById('appointmentSuccess').scrollIntoView({ behavior: 'smooth' });
+}
+
+function showErrorMessage(message) {
+    const errorElement = document.getElementById('appointmentError');
+    const errorMessage = document.getElementById('errorMessage');
+    errorMessage.textContent = message;
+    errorElement.style.display = 'block';
+    errorElement.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Test the connection
+function testConnection() {
+    const testUrl = `${GOOGLE_SHEETS_WEBAPP_URL}?test=1`;
+    fetch(testUrl)
+        .then(r => r.json())
+        .then(data => {
+            console.log('Test result:', data);
+            alert('Connection successful! Server says: ' + data.message);
+        })
+        .catch(err => {
+            console.error('Test failed:', err);
+            alert('Connection failed: ' + err.message);
+        });
+}
 </script>
 
 
