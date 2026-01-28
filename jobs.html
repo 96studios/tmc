@@ -675,7 +675,7 @@
                 // Generate PDF button or unavailable indicator
                 const pdfButton = job.pdfAvailable 
                     ? `<a href="${job.pdfPath || '#'}" class="pdf-download-btn" ${job.pdfPath ? 'target="_blank"' : `onclick="handlePDFDownload(${job.id})"`}>
-                          <i class="fas fa-file-pdf"></i> Download Job Info
+                          <i class="fas fa-file-pdf"></i> Download
                        </a>`
                     : `<span class="pdf-unavailable">
                           <i class="fas fa-info-circle"></i> No PDF available
@@ -692,7 +692,7 @@
                             </div>
                             ${job.status === 'open' ? 
                                 `<button class="btn btn-sa" onclick="applyForJob(${job.id})">Apply Now</button>` : 
-                                `<button class="btn btn-secondary" disabled>Position Closed</button>`
+                                `<button class="btn btn-secondary" disabled>Closed</button>`
                             }
                         </div>
                         
